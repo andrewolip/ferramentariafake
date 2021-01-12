@@ -49,7 +49,7 @@ public class FerramentaServiceImpl implements FerramentaService {
 	public FerramentaEntity buscarPorId(Integer id) {
 		Optional<FerramentaEntity> ferramenta = ferramentaRepository.findById(id);
 		
-		if (ferramenta.isPresent())
+		if (!ferramenta.isPresent())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ferramenta não encontrada.");
 		
 		return ferramenta.get();

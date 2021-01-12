@@ -105,10 +105,6 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 		emprestimo.setDataEntrega(new Date());
 		
 		FerramentaEntity ferramenta = this.ferramentaService.buscarPorId(emprestimo.getFerramenta().getId());
-		
-		if (ferramenta == null)
-			throw new ResponseStatusException(HttpStatus.FOUND);
-		
 		ferramenta.setQuantidade(ferramenta.getQuantidade() + 1);
 		this.ferramentaService.salvar(ferramenta);
 		
