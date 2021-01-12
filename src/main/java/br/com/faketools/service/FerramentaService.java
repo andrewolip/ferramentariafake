@@ -6,6 +6,8 @@ import br.com.faketools.entity.FerramentaEntity;
 
 public interface FerramentaService {
 
+	FerramentaEntity salvar(FerramentaEntity ferramenta);
+	
 	List<FerramentaEntity> listar();
 	
 	FerramentaEntity atualizarQuantidade(Integer idFerramenta);

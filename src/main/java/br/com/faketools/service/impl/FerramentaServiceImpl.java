@@ -54,6 +54,10 @@ public class FerramentaServiceImpl implements FerramentaService {
 		
 		return ferramenta.get();
 	}
-	
+
+	@Override
+	public FerramentaEntity salvar(FerramentaEntity ferramenta) {
+		return ferramentaRepository.save(ferramenta);
+	}
 
 }

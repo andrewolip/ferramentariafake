@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.faketools.entity.EmprestimoEntity;
+import br.com.faketools.entity.FerramentaEntity;
 import br.com.faketools.repository.EmprestimoRepository;
 import br.com.faketools.service.EmprestimoService;
 import br.com.faketools.service.FerramentaService;
@@ -102,6 +103,15 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	public EmprestimoEntity devolverFerramenta(EmprestimoEntity emprestimo) {
 		this.verificarSeEmprestimoExiste(emprestimo.getId());
 		emprestimo.setDataEntrega(new Date());
+		
+		FerramentaEntity ferramenta = this.ferramentaService.buscarPorId(emprestimo.getFerramenta().getId());
+		
+		if (ferramenta == null)
+			throw new ResponseStatusException(HttpStatus.FOUND);
+		
+		ferramenta.setQuantidade(ferramenta.getQuantidade() + 1);
+		this.ferramentaService.salvar(ferramenta);
+		
 		return emprestimoRepository.save(emprestimo);
 	}
 	
